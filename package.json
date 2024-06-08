@@ -1,6 +1,6 @@
 {
   "name": "data-table-of-content",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A JavaScript library to generate table of content from headings! 🏓",
   "keywords": [
     "JavaScript Table of Content",
@@ -13,6 +13,6 @@
     "build": "node scripts/build.js"
   },
   "devDependencies": {
-    "esbuild": "^0.20.2"
+    "esbuild": "^0.21.4"
   }
 }
