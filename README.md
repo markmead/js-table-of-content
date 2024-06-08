@@ -1,7 +1,6 @@
-# Table of Contents
+# Table of Content
 
-Get the headings from an article and generate the HTML for the table of
-contents.
+Get the headings from an article and generate the HTML for the table of content.
 
 See it in action on the [HyperUI blog](https://www.hyperui.dev/blog).
 
@@ -46,105 +45,81 @@ Returns the headings in a nested array for the `data-article` element.
 
 ```json
 [
-  [
-    {
-      "headingId": "",
-      "textContent": "Heading 2"
-    },
-    [
-      [
-        {
-          "headingId": "",
-          "textContent": "Heading 3"
-        },
-        [
-          [
-            {
-              "headingId": "",
-              "textContent": "Heading 4"
-            },
-            []
-          ]
+  {
+    "headingId": "heading-2",
+    "textContent": "Heading 2",
+    "headingChildren": [
+      {
+        "headingId": "heading-3",
+        "textContent": "Heading 3",
+        "headingChildren": [
+          {
+            "headingId": "heading-4",
+            "textContent": "Heading 4"
+          }
         ]
-      ],
-      [
-        {
-          "headingId": "",
-          "textContent": "Heading 3"
-        },
-        []
-      ]
+      },
+      {
+        "headingId": "heading-3.1",
+        "textContent": "Heading 3.1"
+      }
     ]
-  ],
-  [
-    {
-      "headingId": "",
-      "textContent": "Heading 2"
-    },
-    []
-  ],
-  [
-    {
-      "headingId": "",
-      "textContent": "Heading 2"
-    },
-    [
-      [
-        {
-          "headingId": "",
-          "textContent": "Heading 3"
-        },
-        []
-      ]
+  },
+  {
+    "headingId": "heading-2.1",
+    "textContent": "Heading 2.1"
+  },
+  {
+    "headingId": "heading-2.2",
+    "textContent": "Heading 2.2",
+    "headingChildren": [
+      {
+        "headingId": "heading-3.2",
+        "textContent": "Heading 3.2"
+      }
     ]
-  ]
+  }
 ]
 ```
 
-> ![NOTE] I have not set an `id` on the heading elements, which is why the
-> `headingId` values are empty. This is used for linking the table of content
-> headings to headings within the article.
-
 ### `buildArticleHeadings`
 
-> ![NOTE] This is completely optional.
-
-Will take array from `articleHeadings` and create the HTML for the table of
+This will take array from `articleHeadings` and create the HTML for the table of
 contents and insert it into the `data-article-headings` element.
 
 ```html
-<div data-article-headings="">
+<div data-article-toc>
   <ul>
     <li>
-      <a href="#">Heading 2 (First)</a>
+      <a href="#heading-2">Heading 2</a>
 
       <ul>
         <li>
-          <a href="#">Heading 3 (First - First)</a>
+          <a href="#heading-3">Heading 3</a>
 
           <ul>
             <li>
-              <a href="#">Heading 4 (First - First - First)</a>
+              <a href="#heading-4">Heading 4</a>
             </li>
           </ul>
         </li>
 
         <li>
-          <a href="#">Heading 3 (First - Second)</a>
+          <a href="#heading-3.1">Heading 3.1</a>
         </li>
       </ul>
     </li>
 
     <li>
-      <a href="#">Heading 2 (Second)</a>
+      <a href="#heading-2.1">Heading 2.1</a>
     </li>
 
     <li>
-      <a href="#">Heading 2 (Third)</a>
+      <a href="#heading-2.2">Heading 2.2</a>
 
       <ul>
         <li>
-          <a href="#">Heading 3 (Third - First)</a>
+          <a href="#heading-3.2">Heading 3.2</a>
         </li>
       </ul>
     </li>
@@ -157,7 +132,7 @@ contents and insert it into the `data-article-headings` element.
 ```html
 <body>
   <article data-article>
-    <div data-article-headings></div>
+    <div data-article-toc></div>
 
     <h1 id="heading-1">Heading 1</h1>
 
@@ -182,7 +157,7 @@ contents and insert it into the `data-article-headings` element.
       impedit quae?
     </p>
 
-    <h3 id="heading-3.1">Heading 3</h3>
+    <h3 id="heading-3.1">Heading 3.1</h3>
 
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium velit
@@ -190,21 +165,21 @@ contents and insert it into the `data-article-headings` element.
       cumque quis repellendus, voluptate perspiciatis eaque quibusdam?
     </p>
 
-    <h2 id="heading-2.1">Heading 2</h2>
+    <h2 id="heading-2.1">Heading 2.1</h2>
 
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. A, eaque ratione.
       Mollitia placeat vitae voluptas!
     </p>
 
-    <h2 id="heading-2.2">Heading 2</h2>
+    <h2 id="heading-2.2">Heading 2.2</h2>
 
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique minima
       harum ipsam!
     </p>
 
-    <h3 id="heading-3.2">Heading 3 </h3>
+    <h3 id="heading-3.2">Heading 3.2</h3>
 
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni a est porro

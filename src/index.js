@@ -47,53 +47,70 @@ function getHeadings(pageArticle) {
     []
   )
 
-  return groupedHeadings
+  const filteredHeadings = groupedHeadings.map((groupedHeading) => {
+    const [headingItem, headingChildren] = groupedHeading
+
+    if (!headingChildren.length) {
+      return headingItem
+    }
+
+    const filteredChildren = headingChildren.map((headingChild) => {
+      const [childHeading, childChildren] = headingChild
+
+      if (!childChildren.length) {
+        return childHeading
+      }
+
+      return {
+        ...childHeading,
+        headingChildren: childChildren.map((childChild) => {
+          const [childChildHeading, childChildChildren] = childChild
+
+          if (!childChildChildren.length) {
+            return childChildHeading
+          }
+
+          return {
+            ...childChildHeading,
+            headingChildren: childChildChildren,
+          }
+        }),
+      }
+    })
+
+    return {
+      ...headingItem,
+      headingChildren: filteredChildren,
+    }
+  })
+
+  return filteredHeadings
 }
 
 export function buildArticleHeadings(groupHeadings = []) {
-  const articleToc = document.querySelector('[data-article-headings]')
+  const articleToc = document.querySelector('[data-article-toc]')
 
   if (!articleToc) {
     return
   }
 
-  articleToc.innerHTML = `
-    <ul>
-      ${groupHeadings
-        .map((groupedHeadings) => {
-          const [headingParent, headingChildren] = groupedHeadings
-
-          const { headingId, textContent } = headingParent
-
-          const hasChildren = !!headingChildren.length
-
-          return `
-          <li>
-            <a href="#${headingId}">${textContent}</a>
-            ${hasChildren ? buildSubHeadings(headingChildren) : ''}
-          </li>
-        `
-        })
-        .join('')}
-    </ul>
-  `
+  articleToc.innerHTML = buildList(groupHeadings)
 }
 
-function buildSubHeadings(groupedHeadings) {
+function buildList(groupHeadings) {
   return `
     <ul>
-      ${groupedHeadings
-        .map((groupedHeading) => {
-          const [headingParent, headingChildren] = groupedHeading
+      ${groupHeadings
+        .map((groupHeading) => {
+          const { headingId, headingChildren, textContent } = groupHeading
 
-          const { headingId, textContent } = headingParent
-
-          const hasChildren = !!headingChildren.length
+          const hasChildren = !!headingChildren
 
           return `
           <li>
             <a href="#${headingId}">${textContent}</a>
-            ${hasChildren ? buildSubHeadings(headingChildren) : ''}
+
+            ${hasChildren ? buildList(headingChildren) : ''}
           </li>
         `
         })
