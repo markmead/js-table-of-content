@@ -200,7 +200,7 @@ contents and insert it into the `data-article-headings` element.
 
 ## Stats
 
-![](https://img.shields.io/bundlephobia/min/data-masonry)
-![](https://img.shields.io/npm/v/data-masonry)
-![](https://img.shields.io/npm/dt/data-masonry)
-![](https://img.shields.io/github/license/markmead/js-masonry)
+![](https://img.shields.io/bundlephobia/min/data-table-of-content)
+![](https://img.shields.io/npm/v/data-table-of-content)
+![](https://img.shields.io/npm/dt/data-table-of-content)
+![](https://img.shields.io/github/license/markmead/js-table-of-content)
