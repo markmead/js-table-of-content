@@ -3,6 +3,8 @@
 Get the headings from an article and generate the HTML for the table of
 contents.
 
+See it in action on the [HyperUI blog](https://www.hyperui.dev/blog).
+
 ## Install
 
 ### With a CDN
